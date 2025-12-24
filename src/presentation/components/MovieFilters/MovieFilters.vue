@@ -21,18 +21,26 @@
         />
       </div>
 
-      <div class="w-full md:w-48">
-        <Select
-          id="type-filter"
-          v-model="localTypeFilter"
-          label="Tipo"
-          @update:model-value="handleTypeChange"
-        >
-          <option value="">Todos</option>
-          <option value="movie">Película</option>
-          <option value="series">Serie</option>
-          <option value="episode">Episodio</option>
-        </Select>
+      <div class="w-full md:w-auto">
+        <label class="block text-sm font-medium text-text-secondary mb-2">
+          Tipo
+        </label>
+        <div class="flex flex-wrap gap-2">
+          <button
+            v-for="option in typeOptions"
+            :key="option.value"
+            type="button"
+            :class="[
+              'px-4 py-2 text-sm font-medium rounded-button transition-colors',
+              localTypeFilter === option.value
+                ? 'bg-primary text-white'
+                : 'bg-background-secondary text-text-primary hover:bg-background-tertiary'
+            ]"
+            @click="handleTypeChange(option.value)"
+          >
+            {{ option.label }}
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -40,7 +48,13 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import { Input, Select } from '@presentation/shared/components'
+import { Input } from '@presentation/shared/components'
+
+const typeOptions = [
+  { value: '', label: 'Todos' },
+  { value: 'movie', label: 'Película' },
+  { value: 'series', label: 'Serie' },
+]
 
 interface Props {
   searchQuery: string
