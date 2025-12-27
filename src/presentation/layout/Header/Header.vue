@@ -48,7 +48,6 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@application/stores'
-import { Button } from '@presentation/shared/components'
 import { Icon } from '@iconify/vue'
 import logoImage from '../../assets/verifarma-stream.png'
 

@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - VITE_OMDB_API_KEY=${VITE_OMDB_API_KEY}
+        - VITE_API_URL=${VITE_API_URL:-https://www.omdbapi.com}
+    image: verifarma-challenge:latest
+    container_name: verifarma-challenge
+    ports:
+      - "8081:80"
+    restart: unless-stopped
+

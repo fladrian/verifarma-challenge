@@ -43,6 +43,64 @@ pnpm build
 pnpm test
 ```
 
+## 🐳 Docker
+
+### Prerrequisitos
+
+- Docker instalado ([https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/))
+- Docker Compose instalado (incluido en Docker Desktop)
+
+### Configuración
+
+1. **Asegúrate de tener el archivo `.env` configurado** con tus variables de entorno:
+   ```env
+   VITE_OMDB_API_KEY=tu_clave_de_api_aqui
+   VITE_API_URL=https://www.omdbapi.com
+   ```
+
+### Construcción y Ejecución
+
+#### Opción 1: Usando Docker Compose (Recomendado)
+
+```bash
+# Construir y ejecutar el contenedor
+docker-compose up --build
+
+# Ejecutar en segundo plano
+docker-compose up -d --build
+
+# Detener el contenedor
+docker-compose down
+```
+
+La aplicación estará disponible en: `http://localhost:8081`
+
+#### Opción 2: Usando Docker directamente
+
+```bash
+# Construir la imagen
+docker build -t verifarma-challenge .
+
+# Ejecutar el contenedor
+docker run -d -p 8081:80 --name verifarma-challenge verifarma-challenge
+
+# Detener el contenedor
+docker stop verifarma-challenge
+
+# Eliminar el contenedor
+docker rm verifarma-challenge
+```
+
+### Notas sobre Docker
+
+- **Variables de Entorno**: Las variables de entorno deben estar configuradas en el archivo `.env` antes de construir la imagen, ya que Vite las incluye en el build. Docker Compose leerá automáticamente el archivo `.env` y pasará las variables como build arguments.
+- **Puerto**: Por defecto, la aplicación se sirve en el puerto `8081` del host. Puedes cambiarlo modificando el puerto en `docker-compose.yml` o en el comando `docker run`.
+- **Nginx**: La aplicación se sirve usando nginx en modo producción, optimizado para servir archivos estáticos y manejar el routing de Vue Router (SPA).
+- **Build Arguments**: Si usas Docker directamente (sin docker-compose), necesitas pasar las variables de entorno como build arguments:
+  ```bash
+  docker build --build-arg VITE_OMDB_API_KEY=tu_clave --build-arg VITE_API_URL=https://www.omdbapi.com -t verifarma-challenge .
+  ```
+
 ## 📁 Estructura del Proyecto
 
 ```
