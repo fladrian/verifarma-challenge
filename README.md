@@ -1,5 +1,4 @@
-# Movies App - Vue 3 Boilerplate
-
+# Verifarma Stream - By Verifarma challenge
 Proyecto Vue 3 con Clean Architecture, TypeScript, TanStack Query, Pinia, Tailwind CSS, Zod y VeeValidate.
 
 > **Nota**: Este proyecto usa [pnpm](https://pnpm.io/) como gestor de paquetes. Si no lo tienes instalado, puedes instalarlo con: `npm install -g pnpm`
