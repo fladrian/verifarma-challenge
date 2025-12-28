@@ -44,6 +44,7 @@ const emit = defineEmits<{
 
 const handleClick = () => {
   const id = props.imdbID
+  console.log('MovieCard clicked, imdbID:', id)
   if (id) {
     emit('click', id)
   } else {

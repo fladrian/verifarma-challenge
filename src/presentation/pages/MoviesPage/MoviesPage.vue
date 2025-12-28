@@ -104,8 +104,15 @@ const changePage = (page: number) => {
 }
 
 const goToMovieDetail = (imdbID: string) => {
+  console.log('goToMovieDetail called with imdbID:', imdbID)
   if (imdbID && imdbID !== 'undefined') {
-    router.push(`/movies/${imdbID}`)
+    const path = `/movies/${imdbID}`
+    console.log('Navigating to:', path)
+    router.push(path).catch((err) => {
+      console.error('Router push error:', err)
+    })
+  } else {
+    console.error('Invalid imdbID:', imdbID)
   }
 }
 </script>
