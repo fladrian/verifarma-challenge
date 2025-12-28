@@ -1,6 +1,6 @@
 # Movies App - Vue 3 Boilerplate
 
-Proyecto Vue 3 con Clean Architecture, TypeScript, TanStack Query, Pinia, Tailwind CSS y Zod.
+Proyecto Vue 3 con Clean Architecture, TypeScript, TanStack Query, Pinia, Tailwind CSS, Zod y VeeValidate.
 
 > **Nota**: Este proyecto usa [pnpm](https://pnpm.io/) como gestor de paquetes. Si no lo tienes instalado, puedes instalarlo con: `npm install -g pnpm`
 
@@ -15,6 +15,7 @@ Proyecto Vue 3 con Clean Architecture, TypeScript, TanStack Query, Pinia, Tailwi
 - ✅ Axios para peticiones HTTP
 - ✅ @iconify/vue para iconos
 - ✅ Zod para validaciones y entidades
+- ✅ VeeValidate para validación de formularios (integración con Zod)
 - ✅ Vue Router
 - ✅ ESLint
 - ✅ Vitest para testing
@@ -169,7 +170,8 @@ El proyecto utiliza un diseño inspirado en Disney+ con:
 
 1. **Pantalla de Login** (`/login`)
    - Autenticación dummy con email y contraseña
-   - Validación de formulario con Zod
+   - Validación de formulario con VeeValidate y Zod
+   - Manejo automático de errores y estados de validación
 
 2. **Pantalla de Listado de Películas** (`/movies`)
    - Búsqueda de películas usando OMDb API
@@ -187,6 +189,7 @@ El proyecto utiliza un diseño inspirado en Disney+ con:
 - **Clean Architecture**: Separación en capas (presentation, application, core, data)
 - **TypeScript**: Tipado estático para mayor seguridad
 - **TanStack Query**: Gestión de estado del servidor y caché
+- **VeeValidate**: Validación reactiva de formularios con integración Zod
 - **Skeletons**: Componentes de carga para mejor UX
 - **Responsive Design**: Diseño adaptativo para móviles y desktop
 - **Accesibilidad**: Estructura semántica y navegación por teclado
