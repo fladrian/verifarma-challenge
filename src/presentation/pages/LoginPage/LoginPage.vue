@@ -2,7 +2,16 @@
   <div class="min-h-screen flex items-center justify-center bg-background px-4">
     <div class="max-w-md w-full">
       <div class="text-center mb-8">
-        <h1 class="text-4xl font-bold text-text-primary mb-2">Bienvenido</h1>
+        <div class="flex flex-col items-center mb-4">
+          <h1 class="text-4xl font-bold text-text-primary mb-4">Bienvenido a</h1>
+          <div class="p-1 rounded-lg bg-gradient-to-r from-primary via-accent to-primary">
+            <img
+              :src="logoImage"
+              alt="Verifarma"
+              class="h-16 rounded-md bg-background-secondary"
+            />
+          </div>
+        </div>
         <p class="text-text-secondary">Inicia sesión para continuar</p>
       </div>
 
@@ -62,6 +71,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@application/stores'
 import { Icon } from '@iconify/vue'
+import logoImage from '../../assets/verifarma-stream.png'
 
 const router = useRouter()
 const authStore = useAuthStore()
