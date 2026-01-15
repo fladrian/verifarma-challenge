@@ -4,8 +4,6 @@ import { apiClient } from '@shared/config/axios'
 
 export class MovieRepositoryImpl implements MovieRepository {
   async getMovies(page: number = 1, year?: string, type?: string): Promise<MoviesResponse> {
-    // OMDb API requires a search term, so we'll use a popular search term for default movies
-    // Using 'movie' as a default search term to get popular movies
     const params: Record<string, string | number> = {
       s: 'movie',
       page,
@@ -26,7 +24,7 @@ export class MovieRepositoryImpl implements MovieRepository {
     }
 
     const totalResults = parseInt(response.data.totalResults || '0', 10)
-    const totalPages = Math.ceil(totalResults / 10) // OMDb returns 10 results per page
+    const totalPages = Math.ceil(totalResults / 10)
 
     return {
       results: response.data.Search || [],
@@ -40,7 +38,7 @@ export class MovieRepositoryImpl implements MovieRepository {
     const response = await apiClient.get<Movie>('', {
       params: {
         i: id,
-        plot: 'full', // Get full plot
+        plot: 'full',
       },
     })
 
@@ -76,7 +74,7 @@ export class MovieRepositoryImpl implements MovieRepository {
     }
 
     const totalResults = parseInt(response.data.totalResults || '0', 10)
-    const totalPages = Math.ceil(totalResults / 10) // OMDb returns 10 results per page
+    const totalPages = Math.ceil(totalResults / 10)
 
     return {
       results: response.data.Search || [],
