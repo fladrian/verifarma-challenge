@@ -7,7 +7,6 @@
           v-model="localSearchQuery"
           label="Buscar por título"
           placeholder="Ej: Batman, Inception..."
-          @update:model-value="handleSearchChange"
         />
       </div>
 
@@ -17,7 +16,6 @@
           v-model="localYearFilter"
           label="Año"
           placeholder="Ej: 2020"
-          @update:model-value="handleYearChange"
         />
       </div>
 
@@ -48,6 +46,7 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
+import { refDebounced } from '@vueuse/core'
 import { Input } from '@presentation/shared/components'
 
 const typeOptions = [
@@ -74,6 +73,8 @@ const emit = defineEmits<{
 const localSearchQuery = ref(props.searchQuery)
 const localYearFilter = ref(props.yearFilter)
 const localTypeFilter = ref(props.typeFilter)
+const debouncedSearchQuery = refDebounced(localSearchQuery, 500)
+const debouncedYearFilter = refDebounced(localYearFilter, 500)
 
 watch(() => props.searchQuery, (newVal) => {
   localSearchQuery.value = newVal
@@ -87,16 +88,15 @@ watch(() => props.typeFilter, (newVal) => {
   localTypeFilter.value = newVal
 })
 
-const handleSearchChange = (value: string) => {
-  localSearchQuery.value = value
+watch(debouncedSearchQuery, (value) => {
   emit('update:searchQuery', value)
-}
+  emit('filterChange')
+})
 
-const handleYearChange = (value: string) => {
-  localYearFilter.value = value
+watch(debouncedYearFilter, (value) => {
   emit('update:yearFilter', value)
   emit('filterChange')
-}
+})
 
 const handleTypeChange = (value: string) => {
   localTypeFilter.value = value

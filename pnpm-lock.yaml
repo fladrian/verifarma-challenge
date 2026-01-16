@@ -14,6 +14,9 @@ dependencies:
   '@vee-validate/zod':
     specifier: ^4.15.1
     version: 4.15.1(vue@3.5.26)(zod@3.25.76)
+  '@vueuse/core':
+    specifier: ^14.1.0
+    version: 14.1.0(vue@3.5.26)
   axios:
     specifier: ^1.7.7
     version: 1.13.2
@@ -1044,6 +1047,10 @@ packages:
       undici-types: 6.21.0
     dev: true
 
+  /@types/web-bluetooth@0.0.21:
+    resolution: {integrity: sha512-oIQLCGWtcFZy2JW77j9k8nHzAOpqMHLQejDA48XXMWH6tjCQHz5RCFz1bzsmROyL6PUm+LLnUiI4BCn221inxA==}
+    dev: false
+
   /@typescript-eslint/eslint-plugin@7.18.0(@typescript-eslint/parser@7.18.0)(eslint@9.39.2)(typescript@5.9.3):
     resolution: {integrity: sha512-94EQTWZ40mzBc42ATNIBimBEDltSJ9RQHCC8vc/PDbxi4k8dVwUAv4o98dk50M1zB+JGFxp43FP7f8+FP8R6Sw==}
     engines: {node: ^18.18.0 || >=20.0.0}
@@ -1434,6 +1441,29 @@ packages:
       js-beautify: 1.15.4
       vue-component-type-helpers: 2.2.12
     dev: true
+
+  /@vueuse/core@14.1.0(vue@3.5.26):
+    resolution: {integrity: sha512-rgBinKs07hAYyPF834mDTigH7BtPqvZ3Pryuzt1SD/lg5wEcWqvwzXXYGEDb2/cP0Sj5zSvHl3WkmMELr5kfWw==}
+    peerDependencies:
+      vue: ^3.5.0
+    dependencies:
+      '@types/web-bluetooth': 0.0.21
+      '@vueuse/metadata': 14.1.0
+      '@vueuse/shared': 14.1.0(vue@3.5.26)
+      vue: 3.5.26(typescript@5.9.3)
+    dev: false
+
+  /@vueuse/metadata@14.1.0:
+    resolution: {integrity: sha512-7hK4g015rWn2PhKcZ99NyT+ZD9sbwm7SGvp7k+k+rKGWnLjS/oQozoIZzWfCewSUeBmnJkIb+CNr7Zc/EyRnnA==}
+    dev: false
+
+  /@vueuse/shared@14.1.0(vue@3.5.26):
+    resolution: {integrity: sha512-EcKxtYvn6gx1F8z9J5/rsg3+lTQnvOruQd8fUecW99DCK04BkWD7z5KQ/wTAx+DazyoEE9dJt/zV8OIEQbM6kw==}
+    peerDependencies:
+      vue: ^3.5.0
+    dependencies:
+      vue: 3.5.26(typescript@5.9.3)
+    dev: false
 
   /abbrev@2.0.0:
     resolution: {integrity: sha512-6/mh1E2u2YgEsCHdY0Yx5oW+61gZU+1vXaoiHHrpKeuRNNgFvS+/jrwHiQhB5apAf5oB7UB7E19ol2R2LKH8hQ==}

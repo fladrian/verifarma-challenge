@@ -15,6 +15,7 @@ Proyecto Vue 3 con Clean Architecture, TypeScript, TanStack Query, Pinia, Tailwi
 - ✅ @iconify/vue para iconos
 - ✅ Zod para validaciones y entidades
 - ✅ VeeValidate para validación de formularios (integración con Zod)
+- ✅ VueUse para composables utilitarios (debouncing, etc.)
 - ✅ Vue Router
 - ✅ ESLint
 - ✅ Vitest para testing

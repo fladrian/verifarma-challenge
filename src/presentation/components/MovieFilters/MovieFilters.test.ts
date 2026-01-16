@@ -120,7 +120,11 @@ describe('MovieFilters', () => {
     await user.clear(searchInput)
     await user.type(searchInput, 'Inception')
 
-    expect(emitted()['update:searchQuery']).toBeTruthy()
+    // Wait for debounced emission (500ms delay)
+    await waitFor(() => {
+      expect(emitted()['update:searchQuery']).toBeTruthy()
+    }, { timeout: 1000 })
+    
     const lastEmission = emitted()['update:searchQuery'][emitted()['update:searchQuery'].length - 1]
     expect(lastEmission).toEqual(['Inception'])
   })
@@ -140,7 +144,11 @@ describe('MovieFilters', () => {
     await user.clear(yearInput)
     await user.type(yearInput, '2020')
 
-    expect(emitted()['update:yearFilter']).toBeTruthy()
+    // Wait for debounced emission (500ms delay)
+    await waitFor(() => {
+      expect(emitted()['update:yearFilter']).toBeTruthy()
+    }, { timeout: 1000 })
+    
     const lastYearEmission = emitted()['update:yearFilter'][emitted()['update:yearFilter'].length - 1]
     expect(lastYearEmission).toEqual(['2020'])
     expect(emitted().filterChange).toBeTruthy()
