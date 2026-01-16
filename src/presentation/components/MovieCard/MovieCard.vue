@@ -5,10 +5,11 @@
   >
     <div class="aspect-[2/3] bg-background-secondary rounded-card overflow-hidden mb-2 shadow-card hover:shadow-card-hover transition-shadow relative">
       <img
-        v-if="poster && poster !== 'N/A'"
+        v-if="poster && poster !== 'N/A' && !hasError"
         :src="poster"
         :alt="title"
         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+        @error="handleImageError"
       />
       <div v-else class="w-full h-full flex items-center justify-center bg-gray-800">
         <Icon icon="mdi:movie-open" class="w-16 h-16 text-text-muted" />
@@ -27,6 +28,7 @@
 </template>
 
 <script setup lang="ts">
+import { ref, watch } from 'vue'
 import { Icon } from '@iconify/vue'
 
 interface Props {
@@ -41,6 +43,17 @@ const props = defineProps<Props>()
 const emit = defineEmits<{
   click: [imdbID: string]
 }>()
+
+const hasError = ref(false)
+
+// Reset error state when the poster URL changes (prevents keeping old error when reusing component)
+watch(() => props.poster, () => {
+  hasError.value = false
+})
+
+const handleImageError = () => {
+  hasError.value = true
+}
 
 const handleClick = () => {
   const id = props.imdbID
