@@ -1,9 +1,10 @@
-import { computed, ref, type Ref, type ComputedRef } from 'vue'
+import { computed, unref, type Ref, type ComputedRef } from 'vue'
 import { useQuery } from '@tanstack/vue-query'
 import { MovieRepositoryImpl } from '../repositories'
 import type { Movie, MoviesResponse } from '@core/entities'
 
 const movieRepository = new MovieRepositoryImpl()
+
 
 export function useMovies(page: Ref<number>, year?: Ref<string>, type?: Ref<string>) {
   return useQuery<MoviesResponse>({
@@ -13,12 +14,11 @@ export function useMovies(page: Ref<number>, year?: Ref<string>, type?: Ref<stri
 }
 
 export function useMovie(id: string | Ref<string> | ComputedRef<string>) {
-  const idRef = typeof id === 'string' ? ref(id) : id
   return useQuery<Movie>({
-    queryKey: ['movie', computed(() => typeof idRef === 'string' ? idRef : idRef.value)],
-    queryFn: () => movieRepository.getMovie(typeof idRef === 'string' ? idRef : idRef.value),
+    queryKey: ['movie', computed(() => unref(id))],
+    queryFn: () => movieRepository.getMovie(unref(id)),
     enabled: computed(() => {
-      const value = typeof idRef === 'string' ? idRef : idRef.value
+      const value = unref(id)
       return !!value && value.length > 0
     }),
   })
