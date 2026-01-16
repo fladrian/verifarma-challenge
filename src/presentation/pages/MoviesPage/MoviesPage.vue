@@ -41,9 +41,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { useMovies, useFilterMovies } from '@data/composables'
+import { useMovies } from '@data/composables'
 import type { MovieSearchResult } from '@core/entities'
 import { MovieCardSkeleton, MovieCard, MovieFilters, Pagination } from '@presentation/components'
 import { Icon } from '@iconify/vue'
@@ -57,40 +57,23 @@ const typeFilter = ref('')
 
 const {
   data: moviesData,
-  isPending: moviesIsPending,
+  isPending: isLoading,
   error: moviesError,
-} = useMovies(currentPage, yearFilter, typeFilter)
-
-const {
-  data: filterData,
-  isPending: filterIsPending,
-  error: filterError,
-} = useFilterMovies(searchQuery, currentPage, yearFilter, typeFilter)
-
-const hasSearch = computed(() => searchQuery.value.trim().length > 0)
+} = useMovies(searchQuery, currentPage, yearFilter, typeFilter)
 
 const movies = computed<MovieSearchResult[]>(() => {
-  const data = hasSearch.value ? filterData.value : moviesData.value
-  return data?.results || []
+  return moviesData.value?.results || []
 })
 
 const totalPages = computed(() => {
-  const data = hasSearch.value ? filterData.value : moviesData.value
-  return data?.totalPages ?? 0
+  return moviesData.value?.totalPages ?? 0
 })
-
-const isLoading = computed(() => hasSearch.value ? filterIsPending.value : moviesIsPending.value)
 
 const error = computed(() => {
-  const err = hasSearch.value ? filterError.value : moviesError.value
-  if (err) {
-    return err instanceof Error ? err.message : String(err)
+  if (moviesError.value) {
+    return moviesError.value instanceof Error ? moviesError.value.message : String(moviesError.value)
   }
   return null
-})
-
-watch([searchQuery, yearFilter, typeFilter], () => {
-  currentPage.value = 1
 })
 
 const handleFilterChange = () => {
